@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1516194405050.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3E6D04CC",
+    "lastKnownWriteTime" : 0,
+    "last_content_update" : 1516194405050,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "7F90A46E",
+        "caption" : "USAdataset",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=USAdataset&cache_key=7F90A46E",
+        "displayedObservations" : 7998,
+        "environment" : "",
+        "object" : "USAdataset",
+        "preview" : 0,
+        "totalObservations" : 7998,
+        "variables" : 11
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

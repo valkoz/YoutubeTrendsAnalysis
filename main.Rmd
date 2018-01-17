@@ -1,0 +1,74 @@
+---
+title: "YoutubeTrendsAnalysis"
+author: "Kozlov Valentin"
+date: '17 января 2018 г '
+output: html_document
+---
+
+```{r}
+install.packages("ggplot2")
+install.packages("sqldf")
+library(ggplot2)
+require(sqldf)
+```
+
+```{r}
+GBdataset <- read.csv("dataset/GBvideos.csv", 
+                      header = TRUE, 
+                      sep = ",", 
+                      quote = "\"", 
+                      dec = ".", 
+                      fill = TRUE, 
+                      comment.char = "")
+View(GBdataset)
+USAdataset <- read.csv("dataset/USvideos.csv", 
+                      header = TRUE, 
+                      sep = ",", 
+                      quote = "\"", 
+                      dec = ".", 
+                      fill = TRUE, 
+                      comment.char = "")
+View(USAdataset)
+```
+
+```{r}
+GBdataset_size <- nrow(GBdataset)
+USAdataset_size <- nrow(USAdataset)
+```
+
+```{r}
+GBdublicates <- duplicated(GBdataset)
+length(GBdublicates)
+if (length(GBdataset$video_id[GBdublicates]) == 0) {
+  print("Dublicates were not found in GBdataset")
+} else {
+  print("GBdataset contains dublicates")
+}
+
+USAdublicates <- duplicated(USAdataset)
+length(USAdublicates)
+if (length(USAdataset$video_id[USAdublicates]) == 0) {
+  print("Dublicates were not found in USAdataset")
+} else {
+  print("USAdataset contains dublicates")
+}
+```
+
+```{r}
+GBdataset <- sqldf("select * from GBdataset where views != 0")
+Number_videos_with_0_views_GB <- GBdataset_size - nrow(GBdataset)
+GBdataset_size <- nrow(GBdataset)
+
+USAdataset <- sqldf("select * from USAdataset where views != 0")
+Number_videos_with_0_views_USA <- USAdataset_size - nrow(USAdataset)
+USAdataset_size <- nrow(USAdataset)
+
+summary(GBdataset$views)
+
+str(GBdataset)
+```
+
+```{r}
+ggplot(GBdataset, aes(x = views)) + geom_dotplot()
+ggplot(GBdataset, aes(x = as.numeric(as.character(category_id)))) + geom_histogram()
+```
