@@ -92,10 +92,10 @@ Category_statistics_USA <- sqldf("SELECT category_id,
                                   FROM USAdataset GROUP BY category_id")
 View(Category_statistics_USA)
 
-View(sqldf("select * from GBdataset where video_id = 'OeRx4G8Gxnw'"))
+Category_statistics_GB <- Category_statistics_GB[1:10,]
 
-ggplot(data=Category_statistics_GB, aes(x=category_id, y=likes, fill=category_id))
-+ geom_bar(stat="identity")
+ggplot(Category_statistics_GB, aes(category_id, likes, fill=category_id)) +
+  geom_col()
 
 ```
 
