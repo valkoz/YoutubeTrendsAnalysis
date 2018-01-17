@@ -99,3 +99,9 @@ hist(likes, xlim=range(likes), breaks = 100, xlab = "Likes")
 
 hist(likes, xlim=range(0,100000), breaks = 1000, xlab = "Likes")
 ```
+
+```{r}
+categories <- as.numeric(as.character(GBdataset$category_id))
+
+hist(categories, breaks = 30, xlab = "Categories")
+```
