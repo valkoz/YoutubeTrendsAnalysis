@@ -74,6 +74,32 @@ str(GBdataset)
 ```
 
 ```{r}
+Category_statistics_GB <- sqldf("SELECT category_id,
+                                        COUNT(title) as count,
+                                        SUM(likes) as likes, 
+                                        SUM(dislikes) as dislikes, 
+                                        SUM(views) as views, 
+                                        SUM(comment_total) as comment_total
+                                  FROM GBdataset GROUP BY category_id")
+View(Category_statistics_GB)
+
+Category_statistics_USA <- sqldf("SELECT category_id,
+                                        COUNT(title) as count,
+                                        SUM(likes) as likes, 
+                                        SUM(dislikes) as dislikes, 
+                                        SUM(views) as views, 
+                                        SUM(comment_total) as comment_total
+                                  FROM USAdataset GROUP BY category_id")
+View(Category_statistics_USA)
+
+View(sqldf("select * from GBdataset where video_id = 'OeRx4G8Gxnw'"))
+
+ggplot(data=Category_statistics_GB, aes(x=category_id, y=likes, fill=category_id))
++ geom_bar(stat="identity")
+
+```
+
+```{r}
 ggplot(GBdataset, aes(x = views)) + geom_dotplot()
 ggplot(GBdataset, aes(x = as.numeric(as.character(category_id)))) + geom_histogram()
 ```
