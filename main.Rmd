@@ -116,9 +116,7 @@ Category_statistics_USA <- sqldf("SELECT category_id,
                                   FROM USAdataset GROUP BY category_id")
 View(Category_statistics_USA)
 
-View(sqldf("select * from GBdataset where video_id = 'OeRx4G8Gxnw'"))
-
-
+Category_statistics_GB <- Category_statistics_GB[1:10,]
 
 ```
 
@@ -160,3 +158,84 @@ categories <- as.numeric(as.character(GBdataset$category_id))
 
 hist(categories, breaks = 30, xlab = "Categories")
 ```
+
+SentimentAnalysis
+
+```{r}
+
+library(syuzhet) 
+GBcomments <- read.csv("dataset/GBcomments.csv", 
+                      header = TRUE, 
+                      sep = ",", 
+                      quote = "\"", 
+                      dec = ".", 
+                      fill = TRUE, 
+                      comment.char = "")
+                      #, nrows = 70000)
+
+#sentiment analysis core
+commentsText <- GBcomments$comment_text
+commentsSet <- as.character(commentsText)
+syuzhet_vector <- get_sentiment(commentsSet, method="afinn")
+
+
+#add negative/positive rows
+
+for (i in 1:nrow(GBcomments)) {
+  
+  if (syuzhet_vector[i] > 0) {
+    GBcomments$is_positive[i] <- 1 #+ as.integer(GBcomments$likes[i])
+    GBcomments$is_negative[i] <- 0
+  } else if (syuzhet_vector[i] == 0) {
+    GBcomments$is_positive[i] <- 0
+    GBcomments$is_negative[i] <- 0
+  }
+    else if (syuzhet_vector[i] < 0) {
+    GBcomments$is_positive[i] <- 0
+    GBcomments$is_negative[i] <- 1 #+ as.integer(GBcomments$likes[i])
+    }
+  
+}
+
+head(GBcomments)
+
+```
+
+```{r}
+
+UScomments <- read.csv("dataset/UScomments.csv", 
+                      header = TRUE, 
+                      sep = ",", 
+                      quote = "\"", 
+                      dec = ".", 
+                      fill = TRUE, 
+                      comment.char = "",
+                      nrows = 3000)
+
+#sentiment analysis core
+UScommentsText <- UScomments$comment_text
+UScommentsSet <- as.character(UScommentsText)
+USsyuzhet_vector <- get_sentiment(UScommentsSet, method="afinn")
+
+
+#add negative/positive rows
+
+for (i in 1:nrow(UScomments)) {
+  
+  if (USsyuzhet_vector[i] > 0) {
+    UScomments$is_positive[i] <- 1 
+    UScomments$is_negative[i] <- 0
+  } else if (USsyuzhet_vector[i] == 0) {
+    UScomments$is_positive[i] <- 0
+    UScomments$is_negative[i] <- 0
+  }
+    else if (USsyuzhet_vector[i] < 0) {
+    UScomments$is_positive[i] <- 0
+    UScomments$is_negative[i] <- 1
+    }
+  
+}
+
+View(UScomments)
+```
+
