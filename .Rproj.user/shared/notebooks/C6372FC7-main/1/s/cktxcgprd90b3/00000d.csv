@@ -1,0 +1,3 @@
+"0","ggplot(GBdataset, aes(x = as.character(category_id)), stat = count) + geom_histogram()"
+"2","Ошибка: StatBin requires a continuous x variable the x variable is discrete. Perhaps you want stat=""count""?
+"
