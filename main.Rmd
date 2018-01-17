@@ -18,6 +18,26 @@ require(sqldf)
 ```
 
 ```{r}
+library(jsonlite)
+cat_names <- fromJSON("dataset/GB_category_id.json")
+names <- cat_names$items$snippet$title
+head(names)
+map <- table(cat_names$items$id,  cat_names$items$snippet$title)
+summary(map)
+
+```
+
+```{r}
+smoke <- matrix(cat_names$items$snippet$title, ncol=1, byrow=TRUE)
+rownames(smoke) <- c(cat_names$items$id)
+colnames(smoke) <- c("Categories")
+smoke <- as.table(smoke)
+smoke
+
+
+```
+
+```{r}
 GBdataset <- read.csv("dataset/GBvideos.csv", 
                       header = TRUE, 
                       sep = ",", 
