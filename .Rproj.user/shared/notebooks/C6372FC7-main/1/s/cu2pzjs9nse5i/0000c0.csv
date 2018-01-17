@@ -1,2 +1,0 @@
-"0","tmp <- GBdataset$views"
-"0","hist(tmp, xlim=range(tmp), breaks = 100, xlab = ""Views"")"

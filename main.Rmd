@@ -82,11 +82,20 @@ ggplot(GBdataset, aes(x = as.numeric(as.character(category_id)))) + geom_histogr
 plot(GBdataset$views)
 
 
-tmp <- GBdataset$views
+views <- GBdataset$views
 
-hist(tmp, xlim=range(tmp), breaks = 100, xlab = "Views")
+hist(views, xlim=range(tmp), breaks = 100, xlab = "Views")
 
-hist(tmp, xlim=c(0,10000000), breaks = 100, xlab = "Views")
+hist(views, xlim=c(0,10000000), breaks = 300, xlab = "Views")
 
-hist(tmp, xlim=c(1000000,15000000), breaks = 100, xlab = "Views")
+hist(views, xlim=c(1000000,15000000), breaks = 100, xlab = "Views")
+```
+
+
+```{r}
+likes <- GBdataset$likes
+
+hist(likes, xlim=range(likes), breaks = 100, xlab = "Likes")
+
+hist(likes, xlim=range(0,100000), breaks = 1000, xlab = "Likes")
 ```

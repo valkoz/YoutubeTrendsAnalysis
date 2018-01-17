@@ -1,0 +1,2 @@
+"0","likes <- GBdataset$likes"
+"0","hist(likes, xlim=range(likes), breaks = 100, xlab = ""Likes"")"
